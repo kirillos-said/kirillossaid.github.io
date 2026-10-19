@@ -311,6 +311,74 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ---------- Portfolio refresh: dark hero + light content ---------- */
+:root {
+  color-scheme: light;
+  --canvas: #F2F5F9;
+  --tile: #FFFFFF;
+  --ink: #172337;
+  --muted: #566579;
+  --line: #DCE4ED;
+  --accent: #55D6BE;
+  --accent-ink: #102235;
+  --data: #167DB3;
+  --bar: #D5E1EB;
+  --shadow: 0 2px 6px rgba(23, 35, 55, .05), 0 14px 34px rgba(23, 35, 55, .08);
+}
+.nav {
+  background: rgba(16, 27, 44, .94);
+  border-bottom-color: rgba(220, 228, 237, .12);
+}
+body::before { background: rgba(16, 27, 44, .94); }
+.nav.scrolled { border-bottom-color: #34445B; }
+.brand { color: #F5F8FC; }
+.nav-links a { color: #C7D3E2; }
+.nav-links a:hover { color: #FFFFFF; background: #26364B; }
+.hero {
+  background: #101B2C;
+  color: #F5F8FC;
+  padding-top: 76px;
+  padding-bottom: 92px;
+}
+.hero .status { color: #C7D3E2; }
+.hero .status .pill {
+  background: #1B2A40;
+  border-color: #34465E;
+  color: #F5F8FC;
+}
+.hero .role, .hero .summary { color: #F5F8FC; opacity: 1; }
+.hero .tagline { color: #B8C7D9; }
+.hero .btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.hero .btn-primary:hover { box-shadow: 0 8px 24px rgba(85, 214, 190, .18); }
+.hero .btn-ghost {
+  background: transparent;
+  color: #F5F8FC;
+  border-color: #42536B;
+}
+.hero .btn-ghost:hover { background: #1B2A40; border-color: #71839B; }
+.report { color: var(--ink); }
+#projects, #certifications { background: #FFFFFF; }
+#experience, #skills { background: var(--canvas); }
+.card, .job-card, .skills, .cert-list, .edu {
+  box-shadow: 0 1px 2px rgba(23, 35, 55, .025);
+}
+.card:hover { box-shadow: var(--shadow); }
+.contact { background: #101B2C; color: #F5F8FC; }
+.contact .mail, .contact .btn-ghost { color: #F5F8FC; }
+.contact .btn-ghost { border-color: #42536B; }
+.contact .btn-ghost:hover { background: #1B2A40; border-color: #A6B6C9; }
+.cert-main { background: #172337; color: #F5F8FC; }
+@media (max-width: 640px) {
+  .hero { padding-top: 52px; padding-bottom: 64px; }
+  section.block { padding: 64px 0; }
+  .nav-inner { gap: 8px; }
+  .brand { font-size: 15px; }
+}
+
 </style>
 </head>
 <body class="anim">
