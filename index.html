@@ -106,19 +106,13 @@ body::before {
   aspect-ratio: 4 / 5; overflow: hidden; border-radius: 22px;
   background: var(--tile); isolation: isolate;
 }
-.hero-portrait::after {
-  content: ""; position: absolute; inset: 58% 0 0;
-  background: linear-gradient(180deg, transparent, rgba(10, 18, 30, .22));
-  pointer-events: none;
-}
 .hero-portrait img {
   display: block; width: 100%; height: 100%; object-fit: cover;
-  object-position: 76% 24%; transform: scale(1.42); transform-origin: 74% 28%;
+  object-position: center top;
 }
 .hero-portrait .portrait-accent { display: none; }
 @media (max-width: 920px) {
   .hero-portrait { justify-self: start; max-width: 400px; aspect-ratio: 4 / 4.5; }
-  .hero-portrait img { transform: scale(1.32); transform-origin: 74% 28%; }
 }
 
 /* ---------- Hero ---------- */
@@ -375,7 +369,7 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
       </div>
 
       <div class="hero-portrait fade" aria-label="Portrait of Kirillos Said" style="animation-delay:.25s">
-        <img src="IMG_6856.jpeg" alt="Kirillos Said in a professional suit" fetchpriority="high">
+        <img src="images/kirillos-portrait.jpg" alt="Kirillos Said in a navy three-piece suit" width="960" height="1200" fetchpriority="high">
         <span class="portrait-accent" aria-hidden="true"></span>
       </div>
       <div class="report" aria-label="Career highlights">
