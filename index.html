@@ -99,9 +99,35 @@ body::before {
 .btn-ghost:hover { border-color: var(--muted); }
 .btn svg { width: 18px; height: 18px; }
 
+
+/* ---------- Profile portrait ---------- */
+.hero-portrait {
+  position: relative; width: 100%; max-width: 460px; justify-self: end;
+  aspect-ratio: 4 / 5; overflow: hidden; border-radius: 28px;
+  border: 1px solid var(--line); background: var(--tile);
+  box-shadow: 0 24px 60px rgba(25, 33, 43, .16);
+}
+.hero-portrait::after {
+  content: ""; position: absolute; inset: 45% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(10, 18, 30, .38));
+  pointer-events: none;
+}
+.hero-portrait img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 24%;
+}
+.hero-portrait .portrait-accent {
+  position: absolute; z-index: 1; top: 18px; right: 18px;
+  width: 14px; height: 14px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 0 7px rgba(242, 200, 17, .2);
+}
+@media (max-width: 920px) {
+  .hero-portrait { justify-self: start; max-width: 400px; aspect-ratio: 4 / 4.5; }
+}
+
 /* ---------- Hero ---------- */
 .hero { padding: 64px 0 88px; }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 56px; align-items: center; }
+.hero-grid > .report { grid-column: 1 / -1; width: 100%; }
 @media (max-width: 920px) { .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
 .status { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; color: var(--muted); font-size: 15px; margin-bottom: 22px; }
 .status .pill {
@@ -351,6 +377,10 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
         <div class="cta fade" id="cta" style="animation-delay:.55s"></div>
       </div>
 
+      <div class="hero-portrait fade" aria-label="Portrait of Kirillos Said" style="animation-delay:.25s">
+        <img src="IMG_6856.jpeg" alt="Kirillos Said in a professional suit" fetchpriority="high">
+        <span class="portrait-accent" aria-hidden="true"></span>
+      </div>
       <div class="report" aria-label="Career highlights">
         <div class="report-head">
           <strong>Career overview</strong>
