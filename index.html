@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kirillos Said — Power BI Developer & Data Analyst</title>
-<meta name="description" content="Portfolio of Kirillos Said, PL-300 certified Power BI Developer and Data Analyst.">
+<meta name="description" content="Kirillos Said Ghabriel — Power BI Developer and Data Analyst focused on SQL, Power BI, DAX, data modeling, and reporting automation.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='4' y='14' width='6' height='14' rx='1' fill='%2319212B'/><rect x='13' y='8' width='6' height='20' rx='1' fill='%2319212B'/><rect x='22' y='3' width='6' height='25' rx='1' fill='%23F2C811'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -311,6 +311,257 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* ==========================================================
+   Portfolio redesign — SQL, Power BI & analytics
+   CSS-only visual layer; existing data and interactions remain.
+   ========================================================== */
+:root {
+  color-scheme: light;
+  --canvas: #F3F7FB;
+  --tile: #FFFFFF;
+  --ink: #102239;
+  --muted: #53677D;
+  --line: #D8E4EF;
+  --accent: #54C8F2;
+  --accent-ink: #08253A;
+  --data: #087EBD;
+  --bar: #D2E1ED;
+  --shadow: 0 8px 24px rgba(7, 28, 53, .06), 0 22px 55px rgba(7, 28, 53, .07);
+  --wrap: 1200px;
+}
+html { scroll-padding-top: 82px; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.7;
+}
+::selection { background: rgba(84, 200, 242, .35); color: var(--ink); }
+a { text-underline-offset: 4px; }
+:focus-visible { outline-color: var(--accent); }
+.wrap { padding-inline: 28px; }
+.nav {
+  background: rgba(7, 20, 38, .94);
+  border-bottom: 1px solid rgba(166, 207, 235, .16);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+}
+body::before { background: rgba(7, 20, 38, .94); }
+.nav.scrolled { border-bottom-color: #2C4663; }
+.nav-inner { height: 72px; }
+.brand { color: #F4F9FF; letter-spacing: .01em; }
+.brand svg rect { fill: #54C8F2; }
+.brand svg rect:last-child { fill: #54C8F2; }
+.nav-links a {
+  color: #B7C9DB;
+  border-radius: 999px;
+  padding: 9px 15px;
+}
+.nav-links a:hover { color: #FFFFFF; background: #1B3049; }
+.btn {
+  min-height: 48px;
+  padding-inline: 21px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 8px 20px rgba(84, 200, 242, .16);
+}
+.btn-primary:hover { box-shadow: 0 12px 28px rgba(84, 200, 242, .26); }
+.btn-ghost { background: #FFFFFF; border-color: var(--line); }
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0 100px;
+  color: #F3F8FF;
+  background:
+    radial-gradient(ellipse at 78% 18%, rgba(36, 139, 198, .22), transparent 36%),
+    radial-gradient(ellipse at 8% 100%, rgba(84, 200, 242, .10), transparent 34%),
+    #071426;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .22;
+  background-image: linear-gradient(rgba(141, 190, 223, .10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(141, 190, 223, .10) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to right, transparent, #000 55%, #000);
+}
+.hero-grid { position: relative; z-index: 1; gap: clamp(34px, 5vw, 68px); }
+.hero .status { color: #B9CBDE; gap: 10px 12px; }
+.hero .status .pill {
+  color: #DCEBFA;
+  background: rgba(17, 39, 64, .85);
+  border-color: #2D4966;
+}
+.cert-badge {
+  color: #072339;
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.hero h1 {
+  font-size: clamp(3.1rem, 6.3vw, 5.2rem);
+  letter-spacing: -.055em;
+  line-height: .99;
+}
+.hero .role { color: #F4F8FE; font-size: clamp(1.25rem, 2.4vw, 1.65rem); }
+.hero .tagline { color: #85DDF9; font-weight: 600; }
+.hero .summary { color: #D6E2F0; max-width: 36em; opacity: 1; }
+.hero .btn-ghost {
+  color: #F4F8FE;
+  background: rgba(14, 33, 55, .72);
+  border-color: #39516D;
+}
+.hero .btn-ghost:hover { background: #1B3049; border-color: #6B91B3; }
+.report {
+  border-radius: 22px;
+  padding: 22px;
+  border-color: #D7E6F2;
+  box-shadow: 0 26px 70px rgba(0, 0, 0, .23);
+}
+.report-head strong { letter-spacing: -.01em; }
+.kpi { background: #F8FBFE; border-color: #DFEAF3; padding: 15px; }
+.kpi b { color: #102C4B; }
+.kpi span { color: #53677D; }
+.chart-tile { background: #F8FBFE; border-color: #DFEAF3; }
+.bar i { background: #9ABAD1; }
+.bar.top i { background: #35B7E8; }
+.chip {
+  border-radius: 999px;
+  font-weight: 600;
+  background: #EDF5FB;
+  border-color: #D5E4EF;
+  color: #214561;
+}
+.hero .report-foot .chip { background: #E7F6FC; border-color: #C7EAF7; }
+section.block {
+  padding: clamp(68px, 8vw, 104px) 0;
+  border-top: 1px solid var(--line);
+}
+#projects, #skills { background: #F3F7FB; }
+#experience, #certifications { background: #FFFFFF; }
+.block-head { margin-bottom: 40px; }
+.block-head h2 {
+  color: #102239;
+  letter-spacing: -.045em;
+  font-size: clamp(2.15rem, 4.5vw, 3.1rem);
+}
+.block-head p { color: #53677D; }
+.slicer {
+  background: #FFFFFF;
+  padding: 6px;
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(7, 28, 53, .04);
+}
+.slicer button { border-radius: 999px; }
+.slicer button[aria-pressed="true"] {
+  color: #06263B;
+  background: #54C8F2;
+}
+.projects { gap: 22px; }
+.card {
+  border-radius: 20px;
+  border-color: #DCE6EF;
+  box-shadow: 0 4px 16px rgba(7, 28, 53, .035);
+}
+.card.featured { border-color: #B5DFF0; }
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #65BFE5;
+  box-shadow: 0 18px 44px rgba(7, 28, 53, .12);
+}
+.thumb { background: #E7F1F8; border-bottom-color: #DCE6EF; }
+.cover { background: linear-gradient(135deg, #0A1D34, #153C5A); }
+.cover i { background: #4D86A8; opacity: .85; }
+.cover i:nth-child(3n) { background: #54C8F2; }
+.card-body { padding: 24px; gap: 12px; }
+.card-cat {
+  color: #087EBD;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  font-size: 11px;
+  font-weight: 800;
+}
+.card h3 { font-size: 1.32rem; letter-spacing: -.025em; }
+.card.featured h3 { font-size: clamp(1.45rem, 2.3vw, 1.8rem); }
+.card p { color: #53677D; line-height: 1.7; }
+.card .tools { padding-top: 10px; }
+.card .chip { background: #F1F7FB; }
+.job-card {
+  border-radius: 20px;
+  border-color: #DCE6EF;
+  padding: clamp(22px, 3vw, 32px);
+}
+.job::before { border-color: #0F4C75; }
+.job:first-child::before { background: #54C8F2; border-color: #54C8F2; }
+.timeline::before { background: #D8E4EF; }
+.job h3 { font-size: 1.35rem; }
+.job .company { color: #087EBD; }
+.job li::marker { color: #087EBD; }
+.skills { border-radius: 20px; box-shadow: 0 5px 18px rgba(7, 28, 53, .04); }
+.skill-row { padding: 22px 26px; }
+.skill-row h3 { color: #143B5B; }
+.skill-row .chip { background: #EFF7FC; }
+.cert-main {
+  border-radius: 20px;
+  background: linear-gradient(145deg, #0A1D34, #123B5B);
+  color: #F4F9FF;
+  padding: 32px;
+}
+.cert-main .badge { background: #54C8F2; border-radius: 16px; }
+.cert-list, .edu { border-radius: 20px; border-color: #DCE6EF; }
+.cert-item strong { color: #173651; }
+.contact {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(43, 157, 213, .20), transparent 35%),
+    #071426;
+  color: #F4F9FF;
+}
+.contact h2 { letter-spacing: -.05em; }
+.contact .mail { color: #F4F9FF; }
+.contact .btn-ghost {
+  background: #10243C;
+  border-color: #39516D;
+  color: #F4F9FF;
+}
+.contact .btn-ghost:hover { background: #1A3553; border-color: #6A9EC0; }
+.foot { border-top-color: rgba(183, 213, 235, .2); }
+.empty { border-radius: 18px; }
+dialog { border-radius: 22px; }
+.close, .gal-btn { box-shadow: 0 4px 14px rgba(7, 28, 53, .10); }
+@media (max-width: 920px) {
+  .hero { padding: 66px 0 76px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding-inline: 18px; }
+  .nav-inner { height: 64px; }
+  .hero { padding: 52px 0 60px; }
+  .hero h1 { font-size: clamp(2.8rem, 12vw, 4rem); }
+  .report { padding: 14px; border-radius: 18px; }
+  .kpis { gap: 7px; }
+  .kpi { padding: 10px; }
+  .kpi span { font-size: 12px; }
+  section.block { padding: 62px 0; }
+  .block-head { margin-bottom: 28px; }
+  .slicer { border-radius: 16px; }
+  .slicer button { padding-inline: 12px; }
+  .card-body { padding: 20px; }
+  .job-card { padding: 20px; }
+  .skill-row { padding: 18px; }
+  .contact { padding: 72px 0 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero::after { display: none; }
+}
+
 </style>
 </head>
 <body class="anim">
@@ -478,7 +729,7 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
     `<div class="bar${y === top ? " top" : ""}" style="--h:${Math.round((byYear[y] / max) * 78)}%"><i></i><em>${byYear[y]}</em></div>`
   ).join("");
   $("barLabels").innerHTML = years.map((y) => `<span>${y}</span>`).join("");
-  $("reportTools").innerHTML = ["Power BI", "DAX", "SQL", "Python"].map((t) => `<span class="chip">${t}</span>`).join("");
+  $("reportTools").innerHTML = ["SQL Server", "Power BI", "DAX", "ETL / ELT"].map((t) => `<span class="chip">${t}</span>`).join("");
 
   function countUp() {
     document.querySelectorAll("[data-count]").forEach((el, i) => {
