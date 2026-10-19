@@ -297,6 +297,11 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   background-repeat: no-repeat; background-position: 0 100%; padding-bottom: 4px; transition: background-size .3s;
 }
 .contact .mail:hover { background-size: 100% 100%; color: var(--accent-ink); }
+.contact .phone {
+  display: block; width: fit-content; margin: -18px 0 32px; color: var(--canvas);
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem); font-weight: 500; text-decoration: none;
+}
+.contact .phone:hover { color: var(--accent); text-decoration: underline; }
 .contact .btn-ghost { background: transparent; color: var(--canvas); border-color: rgba(255, 255, 255, .28); }
 .contact .btn-ghost:hover { border-color: var(--canvas); }
 @media (prefers-color-scheme: dark) {
@@ -405,6 +410,7 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   <div class="wrap">
     <h2 class="reveal">Let’s turn your data into decisions.</h2>
     <a class="mail" id="mail"></a>
+    <a class="phone" id="phone"></a>
     <div class="cta" id="contactLinks"></div>
     <div class="foot"><span id="copy"></span><span>Built with HTML, CSS and JavaScript</span></div>
   </div>
@@ -602,6 +608,9 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   /* ---------- Contact ---------- */
   $("mail").href = "mailto:" + PROFILE.email;
   $("mail").textContent = PROFILE.email;
+  const phoneNumber = "+201207694672";
+  $("phone").href = "tel:" + phoneNumber;
+  $("phone").textContent = phoneNumber;
   const cl = [];
   if (PROFILE.linkedin) cl.push(`<a class="btn btn-ghost" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">${icon.in}LinkedIn</a>`);
   if (PROFILE.github) cl.push(`<a class="btn btn-ghost" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">${icon.gh}GitHub</a>`);
