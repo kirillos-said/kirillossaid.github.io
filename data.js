@@ -26,7 +26,8 @@ const PROFILE = {
 const HIGHLIGHTS = [
   { value: 8, suffix: "+", label: "Power BI dashboards delivered" },
   { value: 8, suffix: "",  label: "Certifications" },
-  { value: 2, suffix: "",  label: "Years building BI solutions" }
+  // since: تاريخ التخرج (YYYY-MM-DD)، والرقم بيزيد لوحده كل سنة كاملة. عدّل اليوم والشهر لتاريخ تخرجك الفعلي
+  { since: "2024-07-01", suffix: "", label: "Years building BI solutions" }
 ];
 
 /* ==========================================================================

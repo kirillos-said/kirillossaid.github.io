@@ -354,9 +354,17 @@ dialog[open] { animation: open .2s ease-out; }
   $("railResume").innerHTML = $("footResume").innerHTML = resumeHTML();
   if ($("footResume").firstElementChild) $("footResume").firstElementChild.style.marginTop = "18px";
 
-  $("glance").innerHTML = HIGHLIGHTS.map((h) =>
-    `<div><dd>${esc(h.value)}${esc(h.suffix || "")}</dd><dt>${esc(h.label)}</dt></div>`
-  ).join("");
+  // Full years elapsed since a start date, so a highlight with "since" updates itself every year
+  const yearsSince = (iso) => {
+    const s = new Date(iso), n = new Date();
+    let y = n.getFullYear() - s.getFullYear();
+    if (n.getMonth() < s.getMonth() || (n.getMonth() === s.getMonth() && n.getDate() < s.getDate())) y--;
+    return Math.max(0, y);
+  };
+  $("glance").innerHTML = HIGHLIGHTS.map((h) => {
+    const value = h.since ? yearsSince(h.since) : h.value;
+    return `<div><dd>${esc(value)}${esc(h.suffix || "")}</dd><dt>${esc(h.label)}</dt></div>`;
+  }).join("");
 
   /* ---------- Projects ---------- */
   let current = "All";
