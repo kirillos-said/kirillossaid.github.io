@@ -57,6 +57,7 @@ const PROJECTS = [
     tools: ["Power BI", "SQL Server", "DAX", "Power Query", "Data Modeling", "Excel"],
     images: [
       "images/zain-01-overview.jpg",
+      "images/zain-07-data-model.png",
       "images/zain-02-kpis-summary.jpg",
       "images/zain-03-channel-cost.jpg",
       "images/zain-04-payments-by-bucket.jpg",
