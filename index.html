@@ -264,6 +264,15 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   border: 1px solid var(--line); background: var(--tile); color: var(--ink); cursor: pointer; display: grid; place-items: center;
 }
 
+/* Confidentiality note shown inside a project */
+.note {
+  margin: 18px 0 0; padding: 12px 14px; border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-left: 4px solid var(--accent);
+  font-size: 15px; line-height: 1.5;
+}
+.note[hidden] { display: none; }
+
 /* Experience timeline */
 .timeline { position: relative; display: grid; gap: 20px; }
 .timeline::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
@@ -318,12 +327,14 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   display: block; width: fit-content; margin: -18px 0 32px; color: var(--canvas);
   font-size: clamp(1.05rem, 2.5vw, 1.4rem); font-weight: 500; text-decoration: none;
 }
+.contact .phone[hidden] { display: none; }
 .contact .phone:hover { color: var(--accent); text-decoration: underline; }
 .contact .btn-ghost { background: transparent; color: var(--canvas); border-color: rgba(255, 255, 255, .28); }
 .contact .btn-ghost:hover { border-color: var(--canvas); }
 @media (prefers-color-scheme: dark) {
   .contact { background: #0B0F14; color: var(--ink); }
-  .contact .mail, .contact .btn-ghost { color: var(--ink); }
+  .contact .mail, .contact .phone, .contact .btn-ghost { color: var(--ink); }
+  .contact .mail:hover { color: var(--accent-ink); }
   .cert-main { background: #0B0F14; color: var(--ink); border: 1px solid var(--line); }
 }
 .foot { margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, .14); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; opacity: .7; }
@@ -368,7 +379,7 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
         <div class="cta fade" id="cta" style="animation-delay:.55s"></div>
       </div>
 
-      <div class="hero-portrait fade" aria-label="Portrait of Kirillos Said" style="animation-delay:.25s">
+      <div class="hero-portrait fade" style="animation-delay:.25s">
         <img src="kirillos-portrait.jpg" alt="Kirillos Said in a navy three-piece suit" width="960" height="1200" fetchpriority="high">
         <span class="portrait-accent" aria-hidden="true"></span>
       </div>
@@ -431,7 +442,7 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   <div class="wrap">
     <h2 class="reveal">Let’s turn your data into decisions.</h2>
     <a class="mail" id="mail"></a>
-    <a class="phone" id="phone"></a>
+    <a class="phone" id="phone" hidden></a>
     <div class="cta" id="contactLinks"></div>
     <div class="foot"><span id="copy"></span><span>Built with HTML, CSS and JavaScript</span></div>
   </div>
@@ -448,6 +459,7 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
       <h2 id="modalTitle"></h2>
       <p id="modalSummary" style="margin:0"></p>
       <ul id="modalDetails"></ul>
+      <p class="note" id="modalNote" hidden></p>
     </div>
     <div class="modal-side">
       <h3>Tools</h3>
@@ -490,9 +502,18 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   if (PROFILE.linkedin) cta.push(`<a class="btn btn-ghost" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">${icon.in}LinkedIn</a>`);
   $("cta").innerHTML = cta.join("");
 
-  $("kpis").innerHTML = HIGHLIGHTS.map((h) =>
-    `<div class="kpi"><b data-count="${Number(h.value) || 0}" data-suffix="${esc(h.suffix)}">${reduce ? esc(h.value + h.suffix) : "0"}</b><span>${esc(h.label)}</span></div>`
-  ).join("");
+  // KPIs: accept 3, "3+" or 3 with a separate suffix; always animate from the numeric part
+  const kpiParts = (h) => {
+    const raw = String(h.value ?? "");
+    const num = parseFloat(raw.replace(/[^\d.]/g, "")) || 0;
+    const trailing = (raw.match(/[^\d.,]+$/) || [""])[0];
+    const suffix = h.suffix != null && h.suffix !== "" ? String(h.suffix) : trailing;
+    return { num, suffix };
+  };
+  $("kpis").innerHTML = HIGHLIGHTS.map((h) => {
+    const { num, suffix } = kpiParts(h);
+    return `<div class="kpi"><b data-count="${num}" data-suffix="${esc(suffix)}">${reduce ? esc(num + suffix) : "0"}</b><span>${esc(h.label)}</span></div>`;
+  }).join("");
 
   // Certifications by year — computed from CERTIFICATIONS
   const byYear = {};
@@ -580,6 +601,8 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
     $("modalTitle").textContent = p.title;
     $("modalSummary").textContent = p.summary;
     $("modalDetails").innerHTML = (p.details || []).map((d) => `<li>${esc(d)}</li>`).join("");
+    $("modalNote").textContent = p.note || "";
+    $("modalNote").hidden = !p.note;
     $("modalTools").innerHTML = tools(p.tools);
     const l = p.links || {}, links = [];
     if (l.live) links.push(`<a class="btn btn-primary" href="${esc(l.live)}" target="_blank" rel="noopener">${icon.ext}Open live report</a>`);
@@ -629,9 +652,13 @@ dialog[open] { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
   /* ---------- Contact ---------- */
   $("mail").href = "mailto:" + PROFILE.email;
   $("mail").textContent = PROFILE.email;
-  const phoneNumber = "+201207694672";
-  $("phone").href = "tel:" + phoneNumber;
-  $("phone").textContent = phoneNumber;
+  // Prefer PROFILE.phone from data.js; fall back to the number below until you add it there
+  const phoneNumber = PROFILE.phone || "+201207694672";
+  if (phoneNumber) {
+    $("phone").href = "tel:" + phoneNumber.replace(/[^\d+]/g, "");
+    $("phone").textContent = phoneNumber;
+    $("phone").hidden = false;
+  }
   const cl = [];
   if (PROFILE.linkedin) cl.push(`<a class="btn btn-ghost" href="${esc(PROFILE.linkedin)}" target="_blank" rel="noopener">${icon.in}LinkedIn</a>`);
   if (PROFILE.github) cl.push(`<a class="btn btn-ghost" href="${esc(PROFILE.github)}" target="_blank" rel="noopener">${icon.gh}GitHub</a>`);
