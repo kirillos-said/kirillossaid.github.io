@@ -71,16 +71,24 @@ const PROJECTS = [
     category: "Python",
     featured: false,
     summary:
-      "Extracts real-time billing data from Zain Telecom and cross-references it with internal " +
-      "client databases to confirm payment status and amounts paid.",
+      "A desktop tool that checks each customer account against the operator's online payment page, " +
+      "reads the live balance and compares it with the balance on file, so the collections team " +
+      "knows who has already paid and stops spending effort on them.",
+    note:
+      "The source code is not published because the tool was built for a client's internal use.",
     details: [
-      "Replaced a manual daily check",
-      "Saves several hours of work every day"
+      "Takes an Excel list of accounts with their verified outstanding balance and reads the current amount due for each one from the operator's payment page",
+      "Classifies every account automatically: full payment, partial payment, no payment, or balance on the site higher than expected. Accounts that cannot be read are flagged for review",
+      "Built for long unattended runs: automatic retries, paced requests, a live progress bar with time remaining, running counters, searchable result tables and an activity log",
+      "Exports the results to Excel with a separate sheet for each status, ready to load back into the collection database",
+      "Gives the team an up-to-date list of customers who have paid, so they can be taken out of call, SMS and IVR campaigns and contact budget goes to customers who still owe",
+      "Planned next step: connect it to an AI call agent so the agent can read the customer's current invoice during the call, and stop contacting customers who paid in full to cut communication costs"
     ],
-    tools: ["Python", "Web scraping", "SQL"],
+    tools: ["Python", "Selenium", "pandas", "Tkinter", "Excel"],
     images: [],
     links: { live: "", github: "", video: "" }
   },
+
   {
     title: "Nitrogen Estimation in Plant Leaves",
     category: "Machine Learning",
@@ -98,16 +106,24 @@ const PROJECTS = [
   },
   {
     title: "Gender Identifier from Names",
-    category: "Machine Learning",
+    category: "Python",
     featured: false,
     summary:
-      "A classification model that identifies client gender from Arabic and English Saudi names, " +
-      "enriching customer data for behavioral and billing analytics.",
+      "Turns a column of customer names into a gender field. It handles Arabic and English spellings " +
+      "by combining a names database, fuzzy matching, translation and rule-based fallbacks, " +
+      "and processes full customer lists in one run.",
+    note:
+      "The source code is not published because the tool was built for a client's internal use.",
     details: [
-      "Handles Arabic and English spellings",
-      "Feeds customer segmentation in collection analytics"
+      "Extracts the first name from the full name, ignoring titles such as Mr, Dr, Eng and their Arabic equivalents, plus digits and punctuation",
+      "Detects whether each name is written in Arabic or English, then looks it up in an Arabic names database expanded with common spelling variants (hamza forms, taa marbuta, alef maqsura, diacritics)",
+      "Translates English names to Arabic and keeps a local translation cache, so repeated names are not translated twice",
+      "Falls back to fuzzy matching, narrowed by first letter to stay fast on large lists, and then to name-ending rules with lists of known exceptions",
+      "Labels each name as male, female, unisex or unknown, so unmatched names are clearly separated for review instead of guessed",
+      "Built for large lists: autosaves every 50 rows and resumes from the last saved result if interrupted, then exports an Excel file with a summary of success rate, gender split and name languages",
+      "Gives the team a usable gender field so messages and call scripts can be worded correctly for each customer"
     ],
-    tools: ["Python", "Machine learning", "NLP"],
+    tools: ["Python", "pandas", "NLP", "Fuzzy matching", "Excel"],
     images: [],
     links: { live: "", github: "", video: "" }
   }
